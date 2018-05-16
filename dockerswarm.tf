@@ -55,7 +55,7 @@ resource "aws_instance" "manager" {
    }
 depends_on = ["aws_key_pair.test2"]
 }
-resource "aws_instance" "worcker1" {
+resource "aws_instance" "worker1" {
     ami                     = "ami-f4f21593"
     instance_type           = "t2.micro"
     key_name                = "test2"
@@ -63,14 +63,14 @@ resource "aws_instance" "worcker1" {
     associate_public_ip_address = true
    # This is where we configure the instance with ansible-playbook
     provisioner "local-exec" {
-        command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u _server_user_ --private-key ./path/to/local/cert.pem -i '${aws_instance.worcker1.public_ip},' worcker.yml -e 'ansible_python_interpreter=/usr/bin/python3'"
+        command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u _server_user_ --private-key ./path/to/local/cert.pem -i '${aws_instance.worcker1.public_ip},' worker.yml -e 'ansible_python_interpreter=/usr/bin/python3'"
    }
     tags {
-        Name = "worcker1"
+        Name = "worker1"
    }
 depends_on = ["aws_instance.manager"]
 }
-resource "aws_instance" "worcker2" {
+resource "aws_instance" "worker2" {
     ami                     = "ami-f4f21593"
     instance_type           = "t2.micro"
     key_name                = "test2"
@@ -78,10 +78,10 @@ resource "aws_instance" "worcker2" {
     associate_public_ip_address = true
     # This is where we configure the instance with ansible-playbook
     provisioner "local-exec" {
-        command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u _server_user_ --private-key ./path/to/local/cert.pem -i '${aws_instance.worcker2.public_ip},' worcker.yml -e 'ansible_python_interpreter=/usr/bin/python3'"
+        command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u _server_user_ --private-key ./path/to/local/cert.pem -i '${aws_instance.worcker2.public_ip},' worker.yml -e 'ansible_python_interpreter=/usr/bin/python3'"
    }
     tags {
-        Name = "worcker2"
+        Name = "worker2"
    }
-depends_on = ["aws_instance.worcker1"]
+depends_on = ["aws_instance.worker1"]
 }
