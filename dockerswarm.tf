@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 # path to pub certificate for creation key pair 
-variable "certpub" { default = "/home/dim/certs/dn-test2.pub" }
+variable "certpub" { default = "./dn-test2.pub" }
 # path to pem certificate which will be used for connection 
 variable "certpem" { default = "./dn-test2.pem" }
 # path to file with "worker join token" + manager IP + port
