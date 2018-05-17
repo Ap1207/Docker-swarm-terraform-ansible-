@@ -2,6 +2,9 @@
 - hosts: all
   become: true
 
+  vars:
+    file1: ./token
+    
   tasks:
 
     - name: Run the equivalent of "apt-get update" as a separate step
@@ -73,4 +76,4 @@
       debug: var=manager_token.stdout
 
     - name: Write Result
-      local_action: copy content={{ worker_token.stdout }} dest=/home/dim/terraform/token
+      local_action: copy content={{ worker_token.stdout }} dest={{ file1 }}
