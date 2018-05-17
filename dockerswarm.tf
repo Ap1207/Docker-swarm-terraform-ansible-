@@ -47,7 +47,7 @@ resource "aws_instance" "manager" {
         vpc_security_group_ids  = ["${aws_security_group.default.id}"]
     associate_public_ip_address = true
     provisioner "local-exec" {
-    command = "sleep 120"
+    command = "sleep 60"
     } 
     # This is where we configure the instance with ansible-playbook
     provisioner "local-exec" {
