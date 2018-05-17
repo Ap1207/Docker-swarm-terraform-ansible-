@@ -9,12 +9,12 @@ terraform: dockerswarm.tf:
   - init swarm
   - write in file token for worker nodes
   - add to token managers IP and port 2377
-- create "worcker1" instance + launch:
+- create "worker1" instance + launch:
   worcker.yml
   - install docker
   - read token, IP and port from file 
   - join this node/instance to swarm as a worker
-- create "worcker2" instance + launch:
+- create "worker2" instance + launch:
   worcker.yml
   - install docker
   - read token, IP and port from file 
